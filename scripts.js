@@ -3,24 +3,22 @@ let playsong = document.querySelector('#playsong')
 var prevsong = document.querySelector('#prevsong')
 var nextsong = document.querySelector('#nextsong')
 let songstracksrc = []
-let currFolder ;
 
 
 
 
 
-main("my")
+main()
 let currtracksrc ;
 var cuurentaudiotrack = new Audio();
 
+async function getsongs() {
 
+    let a = await fetch(`./songs`)
 
-async function getsongs(folder) {
-    currFolder = folder
-    let a = await fetch(`./songs/${folder}`)
     let promise = await a.text();
-    // console.log(promise)
-
+    console.log(promise)
+    
     let div = document.createElement("div");
     div.innerHTML = promise;
     let as = div.getElementsByTagName("a");
@@ -30,7 +28,6 @@ async function getsongs(folder) {
         if (element.href.endsWith(".mp3")) {
             songs.push(element.href)
         }
-
     }
     return songs
 }
@@ -42,14 +39,14 @@ async function main(axxxa) {
     let songs = document.querySelector(".songs")
     for (let song of a) {
         // console.log(song)
-        song = song.split(`/songs/${currFolder}/`)[1];
+        song = song.split(`/songs/`)[1];
         song = song.split(".mp3")[0];
         song = song.replace(/%20/g, " ");
 
         let [songname, artistName] = song.split(/\s+-\s+/);
         console.log(songname, artistName);
 
-        let fullSongPath = `/songs/${currFolder}/` + songname + " - " + artistName + ".mp3";
+        let fullSongPath = `/songs/` + songname + " - " + artistName + ".mp3";
         songstracksrc.push(fullSongPath);
 
         songs.innerHTML += `<div class="card">
@@ -78,7 +75,7 @@ async function main(axxxa) {
 
             var songName = songNameElement.textContent.trim();
             var artistName = artistNameElement.textContent.trim();
-            currtracksrc = `/songs/${currFolder}/` + songName + " - " + artistName + ".mp3";
+            currtracksrc = `/songs/` + songName + " - " + artistName + ".mp3";
             // console.log(currtracksrc)
             document.querySelector('.songinfoname').innerHTML = songName;
             playsongs(currtracksrc);
@@ -214,7 +211,7 @@ document.querySelector('.closebutton').addEventListener("click",()=>{
 
 function changsongname(src) {
     let song = currtracksrc
-    song = song.split(`/songs/${currFolder}/`)[1];
+    song = song.split(`/songs/`)[1];
     song = song.split(".mp3")[0];
     song = song.replace(/%20/g, " ");
     document.querySelector('.songinfoname').innerHTML = song.split("-")[0];
