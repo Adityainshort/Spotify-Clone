@@ -23,6 +23,13 @@ body{
 .home{
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+.closebutton{
+    height: 3rem;
+    position: absolute;
+    right: 16px;
+    display: none;
 }
 li{
     list-style: none;
@@ -153,11 +160,12 @@ button {
     padding: 27px 10px 10px 11px;
     background-color: #242424;
     position: relative;
+    transition: 1s all ease;
 }
 .playlistscontainer{
     max-height: 70vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: wrap;
     row-gap: 10px;
     column-gap: 3px;
     padding: 20px;
@@ -168,11 +176,18 @@ button {
 }
 .playlistplaybtn{
     position: absolute;
-    bottom: 76px;
+    bottom: 36px;
     right: 20px;
     border: none;
     opacity: 0;
-    transition: 1s all ease-in-out;
+    transition: 1s all ease;
+}
+.playlistcard:hover .playlistplaybtn{
+    bottom: 76px;
+    opacity: 1;
+}
+.playlistcard:hover{
+    background-color:  #404040;
 }
 .playlistcard > *{
     padding-top: 5px;
@@ -237,8 +252,7 @@ button {
     border-radius: 50%;
     position: absolute;
     top: -6px;
-    /* left can go up tp 68 vw  */
-    left: 0vw;
+    left: 100%;
     color: #261c1c;
     background-color: rgb(127, 127, 127);
     border: 1px solid;
@@ -247,8 +261,13 @@ button {
 
 @media (max-width: 1000px) {
     .right{
+        background-color: black;
         display: none;
         width: 60vw;
+        z-index: 1;
+    }
+    .closebutton{
+        display: block;
     }
     .left{
         width: 100vw;
@@ -283,6 +302,13 @@ button {
 }
 
 @media (max-width: 650px) {
+    .playlistscontainer{
+        flex-flow: column ;
+        align-items: center;
+    }
+    .playlistcard{
+        width:70vw
+    }
     .playbar{
         padding-bottom: 40px;
     }
@@ -300,7 +326,8 @@ button {
         filter: invert(1);
     }
     .right{
-        width: 60vw;
+        width: 90vw;
+        z-index: 1;
     }
     
 }
