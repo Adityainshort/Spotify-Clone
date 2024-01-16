@@ -1,6 +1,6 @@
 # Spotify-Clone
 
-Explore this fully functional clone where you can enjoy playing music .
+Explore this fully functional clone where you can enjoy playing music  Here https://adityaspotify.freewebhostmost.com/.
 If you spot any vulnerabilities, kindly reach out. Direct your findings or concerns to me at adityarajsinghhardoi@gmail.com. Your collaboration is highly appreciated!
 
 
